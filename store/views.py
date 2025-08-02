@@ -3,6 +3,9 @@ from .models import Product
 from category.models import Category
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from cart.utils import _cart_id
+
+from cart.models import CartItem  # ✅ ADD THIS LINE
 
 def store(request, category_slug=None):
     categories = None
@@ -28,11 +31,30 @@ def store(request, category_slug=None):
     }
     return render(request, 'store/store.html', context)
 
-
 def product_detail(request, category_slug, product_slug):
-    single_product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug)
-    
+    try:
+        single_product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug)
+        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
+    except Exception as e:
+        raise e
+
     context = {
         'single_product': single_product,
+        'in_cart': in_cart,
     }
     return render(request, 'store/product_detail.html', context)
+
+def search(request):
+    products = []  # Define products by default to avoid UnboundLocalError
+
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            products = Product.objects.filter(
+                Q(product_name__icontains=keyword) | Q(description__icontains=keyword)
+            ).order_by('-created_date')
+
+    context = {
+        'products': products,
+    }
+    return render(request, 'store/store.html', context)
