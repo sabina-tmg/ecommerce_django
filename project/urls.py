@@ -21,7 +21,7 @@ from .views import home
 from django.conf.urls.static import static
 from django.conf import settings
 
-urlpatterns = [
+urlpatterns = [         
     path("admin/", admin.site.urls),
     path("",home, name='home'),
     path('store/', include('store.urls')),
