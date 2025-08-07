@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed</title>
+    <style>
+        body {
+            background: #ffe6e6;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .failure-container {
+            display: inline-block;
+            background: #fff;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .failure-icon {
+            font-size: 60px;
+            color: #e74c3c;
+        }
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #444;
+            font-size: 18px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #fff;
+            background: #e74c3c;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        a:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="failure-container">
+        {{transaction}}
+        <div class="failure-icon">&#10008;</div>
+        <h1>Payment Failed!</h1>
+        <p>Unfortunately, your payment could not be processed.<br>
+        Please try again or contact support.</p>
+        <a href="/">Go to Home</a>
+    </div>
+</body>
+</html>
+

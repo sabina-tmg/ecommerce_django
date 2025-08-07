@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y bg">
+    <div class="container">
+        <h4 class="text-center mb-4">Review Your Order and Make Payment</h4>
+        <div class="row">
+            <!-- Billing Address -->
+            <aside class="col-lg-8">
+                <div class="card mb-3">
+                    <h5 class="card-header">Billing Address</h5>
+                    <div class="card-body">
+                        <p class="mb-1">{{ order.full_name }}</p>
+                        <p class="mb-1">{{ order.full_address }}</p>
+                        <p class="mb-1">{{ order.city }}, {{ order.state }}</p>
+                        <p class="mb-1">{{ order.country }}</p>
+                        <p class="mb-1">{{ order.email }}</p>
+                        <p class="mb-1">{{ order.phone }}</p>
+                        {% if order.order_note %}
+                            <strong>Order Note:</strong> {{ order.order_note }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <h5 class="card-header">Payment Method</h5>
+                    <div class="card-body">
+                        <p class="mb-0">eSewa</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Review Products</h5>
+                    <div class="card-body">
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th>Product</th>
+                                    <th width="120">Quantity</th>
+                                    <th width="120">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart_item in cart_items %}
+                                <tr>
+                                    <td>
+                                        <figure class="itemside align-items-center">
+                                            <div class="aside">
+                                                <img src="{{ cart_item.product.images.url }}" class="img-sm" alt="{{ cart_item.product.product_name }}">
+                                            </div>
+                                            <figcaption class="info">
+                                                <a href="{{ cart_item.product.get_url }}" class="title text-dark">
+                                                    {{ cart_item.product.product_name }}
+                                                </a>
+                                                {% if cart_item.variations.all %}
+                                                <p class="text-muted small mb-0">
+                                                    {% for item in cart_item.variations.all %}
+                                                        {{ item.variation_category|capfirst }}: {{ item.variation_value|capfirst }}<br>
+                                                    {% endfor %}
+                                                </p>
+                                                {% endif %}
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td><span>{{ cart_item.quantity }}</span></td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">Rs. {{ cart_item.sub_total }}</var>
+                                            <small class="text-muted">Rs. {{ cart_item.product.price }} each</small>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Payment Section -->
+            <aside class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right">Rs. {{ total }}</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Tax:</dt>
+                            <dd class="text-right">Rs. {{ tax }}</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Grand Total:</dt>
+                            <dd class="text-right text-dark"><strong>Rs. {{ grand_total }}</strong></dd>
+                        </dl>
+
+
+                        <!-----for esewa integration-->
+                        <!-- eSewa Payment Section -->
+<div class="card shadow-sm p-4 mx-auto" style="max-width: 400px; background-color: #f8f9fa; border-radius: 10px;">
+    
+    <!-- Title -->
+    <h4 class="text-center mb-4" style="color: #28a745; font-weight: bold;">
+        Pay Securely with eSewa
+    </h4>
+
+    <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST" class="text-center">
+        
+        <!-- eSewa Logo -->
+        <img src="{% static 'images/misc/a.jpeg' %}" 
+             alt="Pay with eSewa" 
+             class="img-fluid mb-3"
+             style="height: 80px; object-fit: contain;">
+
+        <!-- Payment Fields -->
+        <div class="mb-3">
+            {{ form|safe }}
+        </div>
+
+        <!-- Pay Button -->
+        <button type="submit" class="btn btn-success btn-lg w-100" style="border-radius: 8px;">
+            Pay with eSewa
+        </button>
+    </form>
+</div>
+
+
+
+
+
+
+           </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

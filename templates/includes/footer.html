@@ -1,32 +1,117 @@
-<!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Attractive E-commerce Footer with Year</title>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .section-footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      font-size: 14px;
+    }
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p {
+      margin: 0;
+      font-size: 1rem;
+      color: #aaa;
+    }
+    .footer-social {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-social a {
+      font-size: 1.6rem;
+      color: #bbb;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .footer-social a.facebook {
+      color: #1877f2;
+    }
+    .footer-social a.facebook:hover {
+      color: #0f52ba;
+      transform: scale(1.2);
+    }
+    .footer-social a.twitter {
+      color: #1da1f2;
+    }
+    .footer-social a.twitter:hover {
+      color: #0d95e8;
+      transform: scale(1.2);
+    }
+    .footer-social a.instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .footer-social a.instagram:hover {
+      transform: scale(1.2);
+      filter: brightness(1.2);
+    }
+    .footer-payments i {
+      font-size: 1.6rem;
+      margin-left: 12px;
+      color: #555;
+      transition: color 0.3s ease;
+    }
+    .footer-payments i:hover {
+      color: #fff;
+      cursor: default;
+    }
+    @media (max-width: 576px) {
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .footer-payments {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<footer class="section-footer">
   <div class="container">
-    <section class="footer-bottom border-top row py-3">
-      <div class="col-md-2">
-        <p class="text-muted mb-0">&copy; 2025 Company Name</p>
+    <section class="footer-bottom">
+      <p>&copy; <span id="year"></span> Your Company Name</p>
+      <div class="footer-social" aria-label="Social media links">
+        <a href="#" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter" class="twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
       </div>
-      <div class="col-md-8 text-md-center">
-        <span class="px-2">info@yourcompany.com</span>
-        <span class="px-2">+977-123-4567890</span>
-        <span class="px-2">Street Name 123, City, Nepal</span>
-      </div>
-      <div class="col-md-2 text-md-right text-muted">
-        <i class="fab fa-lg fa-cc-visa"></i>
-        <i class="fab fa-lg fa-cc-paypal"></i>
-        <i class="fab fa-lg fa-cc-mastercard"></i>
+      <div class="footer-payments" aria-label="Payment methods">
+        <i class="fab fa-cc-visa" title="Visa"></i>
+        <i class="fab fa-cc-paypal" title="PayPal"></i>
+        <i class="fab fa-cc-mastercard" title="MasterCard"></i>
       </div>
     </section>
   </div>
 </footer>
-<!-- ========================= FOOTER END // ========================= -->
 
-<!-- Optional Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('.thumb a').click(function(e) {
-      e.preventDefault();
-      $('.mainImage img').attr('src', $(this).attr("href"));
-    });
-  });
+  // Set the current year dynamically
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
+</body>
+</html>

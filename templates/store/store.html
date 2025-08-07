@@ -43,79 +43,61 @@
 			</div> <!-- card-body.// -->
 		</div>
 	</article> <!-- filter-group  .// -->
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Sizes </h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_4" style="">
-			<div class="card-body">
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> XS </span>
-			  </label>
+	<form method="GET" action="">
+ <!-- Sizes -->
+  <article class="filter-group">
+    <header class="card-header">
+      <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true">
+        <h6 class="title">Sizes</h6>
+      </a>
+    </header>
+    <div class="filter-content collapse show" id="collapse_4">
+      <div class="card-body">
+        {% for size in sizes %}
+        <label class="checkbox-btn">
+          <input type="checkbox" name="size" value="{{ size }}"
+                 {% if size in selected_sizes %}checked{% endif %}
+                 onchange="this.form.submit();">
+          <span class="btn btn-light">{{ size }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+  </article>
 
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> SM </span>
-			  </label>
+  <!-- Price Range -->
+  <article class="filter-group">
+    <header class="card-header">
+      <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true">
+        <h6 class="title">Price range</h6>
+      </a>
+    </header>
+    <div class="filter-content collapse show" id="collapse_3">
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Min</label>
+            <select name="min_price" class="mr-2 form-control">
+              {% for value in min_price_options %}
+              <option value="{{ value }}" {% if value == min_price %}selected{% endif %}>${{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group text-right col-md-6">
+            <label>Max</label>
+            <select name="max_price" class="mr-2 form-control">
+              {% for value in max_price_options %}
+              <option value="{{ value }}" {% if value == max_price %}selected{% endif %}>${{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Apply</button>
+      </div>
+    </div>
+  </article>
+</form>
 
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> LG </span>
-			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> XXL </span>
-			  </label>
-		</div><!-- card-body.// -->
-		</div>
-	</article> <!-- filter-group .// -->
-
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Price range </h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_3" style="">
-			<div class="card-body">
-
-				<div class="form-row">
-				<div class="form-group col-md-6">
-				  <label>Min</label>
-				  <!-- <input class="form-control" placeholder="$0" type="number"> -->
-				  	<select class="mr-2 form-control">
-						<option value="0">$0</option>
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-					</select>
-				</div>
-				<div class="form-group text-right col-md-6">
-				  <label>Max</label>
-				  	<select class="mr-2 form-control">
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-						<option value="2000">$2000+</option>
-					</select>
-				</div>
-				</div> <!-- form-row.// -->
-				<button class="btn btn-block btn-primary">Apply</button>
-			</div><!-- card-body.// -->
-		</div>
-	</article> <!-- filter-group .// -->
 
 </div> <!-- card.// -->
 
